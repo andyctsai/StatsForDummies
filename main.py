@@ -5,11 +5,9 @@ st.write("""
 # DATA 515 Project - Statistics for Dummies
 """)
 
-uploaded_file = st.file_uploader("Choose a file")
-df = pd.read_excel(uploaded_file)
+uploaded_file = st.file_uploader("Choose a CSV file")
 if uploaded_file:
-    df = pd.read_excel(uploaded_file)
-
+    df = pd.read_csv(uploaded_file)
     st.dataframe(df)
     st.table(df)
 
