@@ -24,6 +24,6 @@ elif whatDo == 'Statistics':
              st.radio("1-sample or 2-sample Z-test", ('1-sample', '2-sample', 'ANOVA'))
 if st.button('Say hello'):
      st.write('Why hello there')
- else:
+else:
      st.write('Goodbye')
 st.balloons()
