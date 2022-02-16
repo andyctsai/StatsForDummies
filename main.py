@@ -32,16 +32,20 @@ class HypothesisTest:
         self.test_type = test_type
 
     def do_test(self):
-        population_mean = st.text_input("Enter Population Mean of Null Hypothesis: ")
-        sig_level = st.text_input("Enter Significance Level (Ex: 0.05): ")
-        if population_mean and sig_level:
-            tstat, pvalue = stats.ttest_1samp(test_data.tolist(), popmean=float(population_mean))
-            st.metric(label="T Statistic", value=tstat)
-            st.metric(label="P-value", value=pvalue)
-            if pvalue < float(sig_level):
-                st.write("We reject the null hypothesis at the ", sig_level, " significance level.")
-            else:
-                st.write("We DO NOT reject the null hypothesis at the ", sig_level, " significance level.")
+        if self.test_type == 'T-test':
+            if self.num_samples == '1-sample':
+                if self.num_tails == '2-tailed':
+                    population_mean = st.text_input("Enter Population Mean of Null Hypothesis: ")
+                    sig_level = st.text_input("Enter Significance Level (Ex: 0.05): ")
+                    if population_mean and sig_level:
+                        tstat, pvalue = stats.ttest_1samp(test_data.tolist(), popmean=float(population_mean))
+                        st.metric(label="T Statistic", value=tstat)
+                        st.metric(label="P-value", value=pvalue)
+                        if pvalue < float(sig_level):
+                            st.write("We reject the null hypothesis at the ", sig_level, " significance level.")
+                        else:
+                            st.write("We DO NOT reject the null hypothesis at the ", sig_level, " significance level.")
+
 
 def upload_file():
     uploaded_file = st.file_uploader("Choose a CSV file")
