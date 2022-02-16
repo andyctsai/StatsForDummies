@@ -3,7 +3,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import scipy.stats as stats
-import statsmodel.stats.weightstats as sm
+import statsmodels.stats.weightstats as sm
 
 test_data = None
 
