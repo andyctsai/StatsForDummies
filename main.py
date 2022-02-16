@@ -37,7 +37,7 @@ def what_do(df):
                 column = st.text_input('Dataframe Column For 1-sample Two-tailed T-test')
                 population_mean = st.text_input("Enter Population Mean of Null Hypothesis: ")
                 sig_level = st.text_input("Enter Significance Level (Ex: 0.05): ")
-                if column and population_mean:
+                if column and population_mean and sig_level:
                     tstat, pvalue = stats.ttest_1samp(df[column].tolist(), popmean=float(population_mean))
                     st.metric(label="T Statistic", value=tstat)
                     st.metric(label="P-value", value=pvalue)
