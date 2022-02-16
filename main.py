@@ -13,7 +13,7 @@ class HypothesisTest:
         self.test_type = test_type
         self.num_samples = num_samples
         self.num_tails = num_tails
-        self.set_fuction()
+        self.set_function()
 
     def get_num_samples(self):
         return self.num_samples
@@ -47,7 +47,7 @@ class HypothesisTest:
             else:
                 st.write("We DO NOT reject the null hypothesis at the ", sig_level, " significance level.")
 
-    def set_fuction(self):
+    def set_function(self):
         if self.test_type == 'Z-test':
             self.function = 'sm.ztest'
             self.function_extra = 'value'
@@ -87,7 +87,7 @@ def what_do(df):
             test_type = st.radio("What type of test do you want to perform?", ('Z-test', 'T-test', 'ANOVA'))
             num_samples = st.radio("1-sample or 2-sample test", ('1-sample', '2-sample'))
             num_tails = st.radio("1-tailed or 2-tailed test", ('1-tailed', '2-tailed'))
-            test = HypothesisTest(test_type, num_samples, num_tails)
+            test = HypothesisTest(test_type, num_samples, num_tails, None, None)
             column = st.text_input('Dataframe Column For Hypothesis Test')
             if column:
                 global test_data
