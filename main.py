@@ -8,10 +8,17 @@ def what_do(df):
     if whatDo == 'Data Visualization':
         vizType = st.radio("What type of visualization do you want?", ('Histogram','Scatterplot', 'Bar Chart'))
         if vizType == 'Histogram':
-            columnHeader = st.text_input('Column Header"')
+            columnHeader = st.text_input('Column Header')
             if columnHeader:
                 fig = plt.figure(figsize=(10, 4))
                 plt.hist(df[columnHeader])
+                st.pyplot(fig)
+        if vizType == 'Scatterplot':
+            x = st.text_input('X-axis column')
+            y = st.text_input('Y-axis column')
+            if x and y:
+                fig = plt.figure(figsize=(10, 4))
+                plt.scatter(df[x], df[y])
                 st.pyplot(fig)
     elif whatDo == 'Statistics':
         statType = st.radio("What type of statistics do you want to perform?", ('Summary Statistics','Hypothesis Testing', 'Regression'))
