@@ -66,7 +66,7 @@ def upload_file():
 
 
 def what_do(df):
-    st.write("What do you want to do?")"
+    st.write("What do you want to do?")
     if st.button('Data Visualization'):
         vizType = st.radio("What type of visualization do you want?", ('Histogram', 'Scatterplot'))
         if vizType == 'Histogram':
