@@ -44,6 +44,7 @@ def scatterplot(df, x, y):
         plt.scatter(df[x], df[y])
         st.pyplot(fig)
 
+
 def summarystats(df, column):
     if column:
         mean = df[column].mean()
@@ -55,8 +56,10 @@ def summarystats(df, column):
 def one_or_two_sample():
     st.radio("1-sample or 2-sample test", ('1-sample', '2-sample'))
 
+
 def one_or_two_tailed():
     st.radio("1-tailed or 2-tailed test", ('1-tailed', '2-tailed'))
+
 
 if __name__ == '__main__':
     st.write("""
