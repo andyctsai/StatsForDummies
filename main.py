@@ -4,7 +4,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import scipy.stats as stats
 
-def upload_file:
+def upload_file():
     uploaded_file = st.file_uploader("Choose a CSV file")
     if uploaded_file:
         df = pd.read_csv(uploaded_file)
