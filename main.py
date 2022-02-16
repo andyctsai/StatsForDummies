@@ -77,7 +77,7 @@ def what_do(df):
             y = st.text_input('Y-axis column')
             scatterplot(df, x, y)
 
-    elif if st.button('Statistics'):
+    elif st.button('Statistics'):
         statType = st.radio("What type of statistics do you want to perform?",
                             ('Summary Statistics', 'Hypothesis Testing', 'Regression'))
         if statType == 'Summary Statistics':
