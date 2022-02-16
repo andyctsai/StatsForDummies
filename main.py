@@ -17,6 +17,9 @@ def what_do(df):
 
     elif whatDo == 'Statistics':
         statType = st.radio("What type of statistics do you want to perform?", ('Summary Statistics','Hypothesis Testing', 'Regression'))
+        if statType == 'Summary Statistics':
+            column = st.text_input('Dataframe Column For Summary Statistics')
+            summarystats(df, column)
         if statType == 'Hypothesis Testing':
             testType = st.radio("What type of test do you want to perform?", ('Z-test', 'T-test', 'ANOVA'))
             if testType == 'Z-test' or testType == 'T-test':
@@ -38,6 +41,13 @@ def scatterplot(df, x, y):
         plt.scatter(df[x], df[y])
         st.pyplot(fig)
 
+def summarystats(df, column):
+    if column:
+        mean = df[column].mean()
+        sd = df[column].std()
+        st.metric(label="Mean", value=mean)
+        st.metric(label="Standard Deviation", value=sd)
+
 
 def one_or_two_sample():
     st.radio("1-sample or 2-sample test", ('1-sample', '2-sample'))
@@ -51,6 +61,6 @@ if __name__ == '__main__':
     uploaded_file = st.file_uploader("Choose a CSV file")
     if uploaded_file:
         df = pd.read_csv(uploaded_file)
-        st.write("Data Table")
+        st.write("Dataframe Display")
         st.dataframe(df)
         what_do(df)
