@@ -25,8 +25,8 @@ def what_do(df):
         if statType == 'Hypothesis Testing':
             testType = st.radio("What type of test do you want to perform?", ('Z-test', 'T-test', 'ANOVA'))
             if testType == 'Z-test' or testType == 'T-test':
-                one_or_two_sample = one_or_two_sample()
-                one_or_two_tailed = one_or_two_tailed()
+                one_or_two_sample()
+                one_or_two_tailed()
     if st.button('Click Me to Celebrate!'):
         st.balloons()
 
@@ -53,12 +53,10 @@ def summarystats(df, column):
 
 
 def one_or_two_sample():
-    one_or_two_sample = st.radio("1-sample or 2-sample test", ('1-sample', '2-sample'))
-    return one_or_two_sample
+    st.radio("1-sample or 2-sample test", ('1-sample', '2-sample'))
 
 def one_or_two_tailed():
-    one_or_two_tailed = st.radio("1-tailed or 2-tailed test", ('1-tailed', '2-tailed'))
-    return one_or_two_tailed
+    st.radio("1-tailed or 2-tailed test", ('1-tailed', '2-tailed'))
 
 if __name__ == '__main__':
     st.write("""
