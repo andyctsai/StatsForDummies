@@ -6,4 +6,11 @@ st.write("""
 """)
 
 uploaded_file = st.file_uploader("Choose a file")
-st.dataframe(data=uploaded_file, width=None, height=None)
+df=pd.read_excel(uploaded_file)
+st.dataframe(data=df)
+
+whatDo = st.radio("What do you want to do?", ('Data Visualization', 'Statistics'))
+if whatDo == 'Data Visualization':
+     st.write('What type of visualization do you want?')
+elif whatDo == 'Statistics'
+     st.write("What type of statistics do you want to perform?")
