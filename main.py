@@ -5,16 +5,25 @@ st.write("""
 # DATA 515 Project - Statistics for Dummies
 """)
 
-uploaded_file = st.file_uploader("Upload a CSV file")
+uploaded_file = st.file_uploader("Choose a CSV file")
 if uploaded_file:
     df = pd.read_csv(uploaded_file)
     st.write("Data Table")
     st.dataframe(df)
 
-whatDo = st.radio("What do you want to do?", ('Data Visualization', 'Statistics'), index=None)
+whatDo = st.radio("What do you want to do?", ('Data Visualization', 'Statistics'))
 if whatDo == 'Data Visualization':
-    vizType = st.radio("What type of visualization do you want?", ('Scatterplot', 'Bar Chart'), index=None)
+    vizType = st.radio("What type of visualization do you want?", ('Scatterplot', 'Bar Chart'))
 elif whatDo == 'Statistics':
-    statType = st.radio("What type of statistics do you want to perform?", ('Hypothesis Testing', 'Regression'), index=None)
+    statType = st.radio("What type of statistics do you want to perform?", ('Hypothesis Testing', 'Regression'))
     if statType == 'Hypothesis Testing':
-        testType = st.radio("What type of test do you want to perform?", ('Z-test', 'T-test', 'ANOVA'), index=None)
+        testType = st.radio("What type of test do you want to perform?", ('Z-test', 'T-test', 'ANOVA'))
+        if testType == 'Z-test':
+             st.radio("1-sample or 2-sample Z-test", ('1-sample', '2-sample', 'ANOVA'))
+        if testType == 'T-test':
+             st.radio("1-sample or 2-sample Z-test", ('1-sample', '2-sample', 'ANOVA'))
+if st.button('Say hello'):
+     st.write('Why hello there')
+ else:
+     st.write('Goodbye')
+st.balloons()
