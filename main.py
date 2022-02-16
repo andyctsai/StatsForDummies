@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-import scipy as sp
+import scipy.stats as stats
 
 
 def what_do(df):
@@ -29,7 +29,7 @@ def what_do(df):
                 one_or_two_tailed()
                 column = st.text_input('Dataframe Column For 1-sample Two-tailed T-test')
                 if column:
-                    tstat, pvalue = sp.stats.ttest_1samp(df[column].tolist(), popmean=100)
+                    tstat, pvalue = stats.ttest_1samp(df[column].tolist(), popmean=100)
                     st.metric(label="T Statistic", value=tstat)
                     st.metric(label="P-value", value=pvalue)
 
