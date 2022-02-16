@@ -12,5 +12,5 @@ st.dataframe(data=df)
 whatDo = st.radio("What do you want to do?", ('Data Visualization', 'Statistics'))
 if whatDo == 'Data Visualization':
      st.write('What type of visualization do you want?')
-elif whatDo == 'Statistics'
+elif whatDo == 'Statistics':
      st.write("What type of statistics do you want to perform?")
