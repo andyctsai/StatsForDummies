@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+import matplotlib.pyplot as plt
 
 
 def what_do():
@@ -13,7 +14,7 @@ def what_do():
             if testType == 'Z-test':
                  st.radio("1-sample or 2-sample Z-test", ('1-sample', '2-sample'))
             if testType == 'T-test':
-                 st.radio("1-sample or 2-sample Z-test", ('1-sample', '2-sample'))
+                 st.radio("1-sample or 2-sample T-test", ('1-sample', '2-sample'))
     if st.button('Click Me to Celebrate!'):
         st.balloons()
 
