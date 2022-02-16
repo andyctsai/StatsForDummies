@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 def what_do(df):
     whatDo = st.radio("What do you want to do?", ('Data Visualization', 'Statistics'))
     if whatDo == 'Data Visualization':
-        vizType = st.radio("What type of visualization do you want?", ('Histogram','Scatterplot', 'Bar Chart'))
+        vizType = st.radio("What type of visualization do you want?", ('Histogram','Scatterplot'))
         if vizType == 'Histogram':
             columnHeader = st.text_input('Column Header')
             if columnHeader:
@@ -16,10 +16,8 @@ def what_do(df):
         if vizType == 'Scatterplot':
             x = st.text_input('X-axis column')
             y = st.text_input('Y-axis column')
-            if x and y:
-                fig = plt.figure(figsize=(10, 4))
-                plt.scatter(df[x], df[y])
-                st.pyplot(fig)
+            scatterplot(df, x, y)
+
     elif whatDo == 'Statistics':
         statType = st.radio("What type of statistics do you want to perform?", ('Summary Statistics','Hypothesis Testing', 'Regression'))
         if statType == 'Hypothesis Testing':
@@ -28,6 +26,13 @@ def what_do(df):
                 one_or_two_sample()
     if st.button('Click Me to Celebrate!'):
         st.balloons()
+
+
+def scatterplot(df, x, y):
+    if x and y:
+        fig = plt.figure(figsize=(10, 4))
+        plt.scatter(df[x], df[y])
+        st.pyplot(fig)
 
 
 def one_or_two_sample():
