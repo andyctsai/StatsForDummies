@@ -9,6 +9,7 @@ def what_do(df):
         vizType = st.radio("What type of visualization do you want?", ('Histogram','Scatterplot'))
         if vizType == 'Histogram':
             column = st.text_input('Dataframe Column For Histogram')
+            histogram(df, column)
         if vizType == 'Scatterplot':
             x = st.text_input('X-axis column')
             y = st.text_input('Y-axis column')
@@ -23,10 +24,12 @@ def what_do(df):
     if st.button('Click Me to Celebrate!'):
         st.balloons()
 
+
 def histogram(df, column):
     fig = plt.figure(figsize=(10, 4))
     plt.hist(df[column])
     st.pyplot(fig)
+
 
 def scatterplot(df, x, y):
     if x and y:
