@@ -66,8 +66,8 @@ def upload_file():
 
 
 def what_do(df):
-    whatDo = st.radio("What do you want to do?", ('Data Visualization', 'Statistics'))
-    if whatDo == 'Data Visualization':
+    st.write("What do you want to do?")"
+    if st.button('Data Visualization'):
         vizType = st.radio("What type of visualization do you want?", ('Histogram', 'Scatterplot'))
         if vizType == 'Histogram':
             column = st.text_input('Dataframe Column For Histogram')
@@ -77,7 +77,7 @@ def what_do(df):
             y = st.text_input('Y-axis column')
             scatterplot(df, x, y)
 
-    elif whatDo == 'Statistics':
+    elif if st.button('Statistics'):
         statType = st.radio("What type of statistics do you want to perform?",
                             ('Summary Statistics', 'Hypothesis Testing', 'Regression'))
         if statType == 'Summary Statistics':
