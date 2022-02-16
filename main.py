@@ -8,11 +8,13 @@ st.write("""
 uploaded_file = st.file_uploader("Choose a CSV file")
 if uploaded_file:
     df = pd.read_csv(uploaded_file)
+    st.write("Data Table")
     st.dataframe(df)
-    st.table(df)
 
 whatDo = st.radio("What do you want to do?", ('Data Visualization', 'Statistics'))
 if whatDo == 'Data Visualization':
-     st.write('What type of visualization do you want?')
+    vizType = st.radio("What type of visualization do you want?", ('Scatterplot', 'Bar Chart'))
 elif whatDo == 'Statistics':
-     st.write("What type of statistics do you want to perform?")
+    statType = st.radio("What type of statistics do you want to perform?", ('Hypothesis Testing', 'Regression'))
+    if statType == 'Hypothesis Testing':
+        testType = st.radio("What type of test do you want to perform?", ('Z-test', 'T-test', 'ANOVA'))
