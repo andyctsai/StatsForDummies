@@ -76,7 +76,8 @@ def what_do(df):
             test = HypothesisTest(test_type, num_samples, num_tails)
             column = st.text_input('Dataframe Column For 1-sample Two-tailed T-test')
             test_data = df[column]
-            test.do_test()
+            st.table(test_data)
+            # test.do_test()
             # population_mean = st.text_input("Enter Population Mean of Null Hypothesis: ")
             # sig_level = st.text_input("Enter Significance Level (Ex: 0.05): ")
             # if column and population_mean and sig_level:
