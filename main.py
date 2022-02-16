@@ -36,7 +36,7 @@ class HypothesisTest:
         population_mean = st.text_input("Enter Population Mean of Null Hypothesis: ")
         sig_level = st.text_input("Enter Significance Level (Ex: 0.05): ")
         if population_mean and sig_level:
-            zstat, pvalue_z = sm.ztest(test_data.tolist(), float(population_mean))
+            zstat, pvalue_z = sm.ztest(test_data.tolist(), value=float(population_mean))
             tstat, pvalue_t = stats.ttest_1samp(test_data.tolist(), popmean=float(population_mean))
             st.metric(label="Z Statistic", value=zstat)
             st.metric(label="P-value for Z-test", value=pvalue_z)
