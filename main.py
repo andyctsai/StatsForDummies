@@ -31,20 +31,22 @@ def what_do(df):
             summarystats(df, column)
         if statType == 'Hypothesis Testing':
             testType = st.radio("What type of test do you want to perform?", ('Z-test', 'T-test', 'ANOVA'))
-            if testType == 'Z-test' or testType == 'T-test':
-                one_or_two_sample()
-                one_or_two_tailed()
-                column = st.text_input('Dataframe Column For 1-sample Two-tailed T-test')
-                population_mean = st.text_input("Enter Population Mean of Null Hypothesis: ")
-                sig_level = st.text_input("Enter Significance Level (Ex: 0.05): ")
-                if column and population_mean and sig_level:
-                    tstat, pvalue = stats.ttest_1samp(df[column].tolist(), popmean=float(population_mean))
-                    st.metric(label="T Statistic", value=tstat)
-                    st.metric(label="P-value", value=pvalue)
-                    if pvalue < float(sig_level):
-                        st.write("We reject the null hypothesis at the ", sig_level, " significance level.")
-                    else:
-                        st.write("We DO NOT reject the null hypothesis at the ", sig_level, " significance level.")
+            if testType == 'T-test':
+                one_or_two_sample = st.radio("1-sample or 2-sample test", ('1-sample', '2-sample'))
+                one_or_two_tailed = st.radio("1-tailed or 2-tailed test", ('1-tailed', '2-tailed'))
+                if one_or_two_sample == '1-sample':
+                    if one_or_two_tailed == '2-tailed':
+                        column = st.text_input('Dataframe Column For 1-sample Two-tailed T-test')
+                        population_mean = st.text_input("Enter Population Mean of Null Hypothesis: ")
+                        sig_level = st.text_input("Enter Significance Level (Ex: 0.05): ")
+                        if column and population_mean and sig_level:
+                            tstat, pvalue = stats.ttest_1samp(df[column].tolist(), popmean=float(population_mean))
+                            st.metric(label="T Statistic", value=tstat)
+                            st.metric(label="P-value", value=pvalue)
+                            if pvalue < float(sig_level):
+                                st.write("We reject the null hypothesis at the ", sig_level, " significance level.")
+                            else:
+                                st.write("We DO NOT reject the null hypothesis at the ", sig_level, " significance level.")
 
 
 
@@ -68,14 +70,6 @@ def summarystats(df, column):
         sd = df[column].std()
         st.metric(label="Mean", value=mean)
         st.metric(label="Standard Deviation", value=sd)
-
-
-def one_or_two_sample():
-    st.radio("1-sample or 2-sample test", ('1-sample', '2-sample'))
-
-
-def one_or_two_tailed():
-    st.radio("1-tailed or 2-tailed test", ('1-tailed', '2-tailed'))
 
 
 if __name__ == '__main__':
