@@ -6,6 +6,8 @@ def what_do():
     whatDo = st.radio("What do you want to do?", ('Data Visualization', 'Statistics'))
     if whatDo == 'Data Visualization':
         vizType = st.radio("What type of visualization do you want?", ('Histogram','Scatterplot', 'Bar Chart'))
+        df.hist(column="IQ")
+        plt.show()
     elif whatDo == 'Statistics':
         statType = st.radio("What type of statistics do you want to perform?", ('Summary Statistics','Hypothesis Testing', 'Regression'))
         if statType == 'Hypothesis Testing':
