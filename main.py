@@ -26,9 +26,10 @@ def what_do(df):
 
 
 def histogram(df, column):
-    fig = plt.figure(figsize=(10, 4))
-    plt.hist(df[column])
-    st.pyplot(fig)
+    if column:
+        fig = plt.figure(figsize=(10, 4))
+        plt.hist(df[column])
+        st.pyplot(fig)
 
 
 def scatterplot(df, x, y):
