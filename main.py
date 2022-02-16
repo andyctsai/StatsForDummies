@@ -19,6 +19,7 @@ def what_do(df):
                 one_or_two_sample()
     if st.button('Click Me to Celebrate!'):
         st.balloons()
+    st.radio("What type of test do you want to perform?", pd.Series(df))
 
 
 def one_or_two_sample():
