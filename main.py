@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-
+import matplotlib.pyplot as plt
 
 def what_do():
     whatDo = st.radio("What do you want to do?", ('Data Visualization', 'Statistics'))
