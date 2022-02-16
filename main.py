@@ -27,8 +27,6 @@ def what_do(df):
             if testType == 'Z-test' or testType == 'T-test':
                 one_or_two_sample()
                 one_or_two_tailed()
-    if st.button('Click Me to Celebrate!'):
-        st.balloons()
 
 
 def histogram(df, column):
