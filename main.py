@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+import scipy.stats as stats
 
 
 def what_do(df):
@@ -24,8 +25,14 @@ def what_do(df):
         if statType == 'Hypothesis Testing':
             testType = st.radio("What type of test do you want to perform?", ('Z-test', 'T-test', 'ANOVA'))
             if testType == 'Z-test' or testType == 'T-test':
-                one_or_two_sample()
-                one_or_two_tailed()
+                one_or_two_sample = one_or_two_sample()
+                one_or_two_tailed = one_or_two_tailed()
+                if testType == 'T-test' and one_or_two_sample == '1-sample' and one_or_two_tailed == '2-tailed':
+                    column = st.text_input('Dataframe Column For 1-sample T-test')
+                    population_mean = float(st.text_input("Enter Population Mean of Null Hypothesis: "))
+                    tstat, pvalue = stats.ttest_1samp(df[column].tolist(), popmean=population_mean)
+                    st.metric(label="T Statistic", value=tstat)
+                    st.metric(label="P-value", value=pvalue)
     if st.button('Click Me to Celebrate!'):
         st.balloons()
 
@@ -52,12 +59,12 @@ def summarystats(df, column):
 
 
 def one_or_two_sample():
-    st.radio("1-sample or 2-sample test", ('1-sample', '2-sample'))
-
+    one_or_two_sample = st.radio("1-sample or 2-sample test", ('1-sample', '2-sample'))
+    return one_or_two_sample
 
 def one_or_two_tailed():
-    st.radio("1-tailed or 2-tailed test", ('1-tailed', '2-tailed'))
-
+    one_or_two_tailed = st.radio("1-tailed or 2-tailed test", ('1-tailed', '2-tailed'))
+    return one_or_two_tailed
 
 if __name__ == '__main__':
     st.write("""
