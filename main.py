@@ -8,8 +8,9 @@ def what_do(df):
     if whatDo == 'Data Visualization':
         vizType = st.radio("What type of visualization do you want?", ('Histogram','Scatterplot', 'Bar Chart'))
         if vizType == 'Histogram':
+            columnHeader = st.text_input('Column Header"')
             fig = plt.figure(figsize=(10, 4))
-            plt.hist(df["IQ"])
+            plt.hist(df[columnHeader])
             st.pyplot(fig)
     elif whatDo == 'Statistics':
         statType = st.radio("What type of statistics do you want to perform?", ('Summary Statistics','Hypothesis Testing', 'Regression'))
