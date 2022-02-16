@@ -2,14 +2,15 @@ import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
 
+
 def what_do(df):
     whatDo = st.radio("What do you want to do?", ('Data Visualization', 'Statistics'))
     if whatDo == 'Data Visualization':
         vizType = st.radio("What type of visualization do you want?", ('Histogram','Scatterplot', 'Bar Chart'))
-        df.hist(column="IQ")
-        fig = plt.figure(figsize=(10, 4))
-        plt.hist(df["IQ"])
-        st.pyplot(fig)
+        if vizType == 'Histogram':
+            fig = plt.figure(figsize=(10, 4))
+            plt.hist(df["IQ"])
+            st.pyplot(fig)
     elif whatDo == 'Statistics':
         statType = st.radio("What type of statistics do you want to perform?", ('Summary Statistics','Hypothesis Testing', 'Regression'))
         if statType == 'Hypothesis Testing':
