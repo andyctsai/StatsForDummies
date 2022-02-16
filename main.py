@@ -27,6 +27,11 @@ def what_do(df):
             if testType == 'Z-test' or testType == 'T-test':
                 one_or_two_sample()
                 one_or_two_tailed()
+                column = st.text_input('Dataframe Column For 1-sample Two-tailed T-test')
+                tstat, pvalue = stats.ttest_1samp(df[column].tolist(), popmean=100)
+                st.metric(label="T Statistic", value=tstat)
+                st.metric(label="P-value", value=pvalue)
+
 
 
 def histogram(df, column):
