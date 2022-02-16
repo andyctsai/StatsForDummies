@@ -4,6 +4,13 @@ import numpy as np
 import matplotlib.pyplot as plt
 import scipy.stats as stats
 
+def upload_file:
+    uploaded_file = st.file_uploader("Choose a CSV file")
+    if uploaded_file:
+        df = pd.read_csv(uploaded_file)
+        st.write("Dataframe Display")
+        st.dataframe(df)
+        what_do(df)
 
 def what_do(df):
     whatDo = st.radio("What do you want to do?", ('Data Visualization', 'Statistics'))
@@ -70,9 +77,4 @@ if __name__ == '__main__':
     st.write("""
     # DATA 515 Project - Statistics for Dummies
     """)
-    uploaded_file = st.file_uploader("Choose a CSV file")
-    if uploaded_file:
-        df = pd.read_csv(uploaded_file)
-        st.write("Dataframe Display")
-        st.dataframe(df)
-        what_do(df)
+    upload_file()
