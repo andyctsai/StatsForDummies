@@ -9,10 +9,11 @@ test_data = None
 
 
 class HypothesisTest:
-    def __init__(self, test_type, num_samples, num_tails):
+    def __init__(self, test_type, num_samples, num_tails, function, function_extra):
         self.test_type = test_type
         self.num_samples = num_samples
         self.num_tails = num_tails
+        self.set_fuction()
 
     def get_num_samples(self):
         return self.num_samples
@@ -36,18 +37,23 @@ class HypothesisTest:
         population_mean = st.text_input("Enter Population Mean of Null Hypothesis: ")
         sig_level = st.text_input("Enter Significance Level (Ex: 0.05): ")
         if population_mean and sig_level:
-            if self.test_type == "Z-test":
-                zstat, pvalue = sm.ztest(test_data.tolist(), value=float(population_mean))
-                st.metric(label="Z Statistic", value=zstat)
-                st.metric(label="P-value for Z-test", value=pvalue)
-            elif self.test_type == 'T-test':
-                tstat, pvalue = stats.ttest_1samp(test_data.tolist(), popmean=float(population_mean))
-                st.metric(label="T Statistic", value=tstat)
-                st.metric(label="P-value for T-test", value=pvalue)
+            zstat, pvalue = eval(
+                self.function + "test_data.tolist()," + self.function_extra + "=float(population_mean)")
+            st.metric(label="Z Statistic", value=zstat)
+            st.metric(label="P-value for Z-test", value=pvalue)
+
             if pvalue < float(sig_level):
                 st.write("We reject the null hypothesis at the ", sig_level, " significance level.")
             else:
                 st.write("We DO NOT reject the null hypothesis at the ", sig_level, " significance level.")
+
+    def set_fuction(self):
+        if self.test_type == 'Z-test':
+            self.function = 'sm.ztest'
+            self.function_extra = 'value'
+        elif self.test_type == 'T-test':
+            self.function = 'stats.ttest_1samp'
+            self.function_extra = 'popmean'
 
 
 def upload_file():
@@ -58,10 +64,11 @@ def upload_file():
         st.dataframe(df)
         what_do(df)
 
+
 def what_do(df):
     whatDo = st.radio("What do you want to do?", ('Data Visualization', 'Statistics'))
     if whatDo == 'Data Visualization':
-        vizType = st.radio("What type of visualization do you want?", ('Histogram','Scatterplot'))
+        vizType = st.radio("What type of visualization do you want?", ('Histogram', 'Scatterplot'))
         if vizType == 'Histogram':
             column = st.text_input('Dataframe Column For Histogram')
             histogram(df, column)
@@ -71,7 +78,8 @@ def what_do(df):
             scatterplot(df, x, y)
 
     elif whatDo == 'Statistics':
-        statType = st.radio("What type of statistics do you want to perform?", ('Summary Statistics','Hypothesis Testing', 'Regression'))
+        statType = st.radio("What type of statistics do you want to perform?",
+                            ('Summary Statistics', 'Hypothesis Testing', 'Regression'))
         if statType == 'Summary Statistics':
             column = st.text_input('Dataframe Column For Summary Statistics')
             summarystats(df, column)
