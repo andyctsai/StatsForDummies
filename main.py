@@ -3,6 +3,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import scipy.stats as stats
+import statsmodel.stats.weightstats as sm
 
 test_data = None
 
@@ -35,10 +36,13 @@ class HypothesisTest:
         population_mean = st.text_input("Enter Population Mean of Null Hypothesis: ")
         sig_level = st.text_input("Enter Significance Level (Ex: 0.05): ")
         if population_mean and sig_level:
-            tstat, pvalue = stats.ttest_1samp(test_data.tolist(), popmean=float(population_mean))
+            zstat, pvalue_z = sm.ztest(test_data.tolist(), float(population_mean))
+            tstat, pvalue_t = stats.ttest_1samp(test_data.tolist(), popmean=float(population_mean))
+            st.metric(label="Z Statistic", value=zstat)
+            st.metric(label="P-value for Z-test", value=pvalue_z)
             st.metric(label="T Statistic", value=tstat)
-            st.metric(label="P-value", value=pvalue)
-            if pvalue < float(sig_level):
+            st.metric(label="P-value for T-test", value=pvalue_t)
+            if pvalue_z < float(sig_level):
                 st.write("We reject the null hypothesis at the ", sig_level, " significance level.")
             else:
                 st.write("We DO NOT reject the null hypothesis at the ", sig_level, " significance level.")
@@ -74,7 +78,7 @@ def what_do(df):
             num_samples = st.radio("1-sample or 2-sample test", ('1-sample', '2-sample'))
             num_tails = st.radio("1-tailed or 2-tailed test", ('1-tailed', '2-tailed'))
             test = HypothesisTest(test_type, num_samples, num_tails)
-            column = st.text_input('Dataframe Column For 1-sample Two-tailed T-test')
+            column = st.text_input('Dataframe Column For Hypothesis Test')
             if column:
                 global test_data
                 test_data = df[column]
