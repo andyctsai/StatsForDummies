@@ -28,8 +28,9 @@ def what_do(df):
                 one_or_two_sample()
                 one_or_two_tailed()
                 column = st.text_input('Dataframe Column For 1-sample Two-tailed T-test')
-                if column:
-                    tstat, pvalue = stats.ttest_1samp(df[column].tolist(), popmean=100)
+                population_mean = float(st.text_input("Enter Population Mean of Null Hypothesis: "))
+                if column and population_mean:
+                    tstat, pvalue = stats.ttest_1samp(df[column].tolist(), popmean=population_mean)
                     st.metric(label="T Statistic", value=tstat)
                     st.metric(label="P-value", value=pvalue)
 
