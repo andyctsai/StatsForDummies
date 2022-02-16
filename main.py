@@ -27,12 +27,6 @@ def what_do(df):
             if testType == 'Z-test' or testType == 'T-test':
                 one_or_two_sample = one_or_two_sample()
                 one_or_two_tailed = one_or_two_tailed()
-                if testType == 'T-test' and one_or_two_sample == '1-sample' and one_or_two_tailed == '2-tailed':
-                    column = st.text_input('Dataframe Column For 1-sample 2-tailed T-test')
-                    population_mean = float(st.text_input("Enter Population Mean of Null Hypothesis: "))
-                    tstat, pvalue = stats.ttest_1samp(df[column].tolist(), popmean=population_mean)
-                    st.metric(label="T Statistic", value=tstat)
-                    st.metric(label="P-value", value=pvalue)
     if st.button('Click Me to Celebrate!'):
         st.balloons()
 
